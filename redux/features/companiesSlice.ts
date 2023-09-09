@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Company } from '@/models/company';
+import { RootState } from '../store';
 
 type initialState = {
   value: Company[];
 };
 
-const initialState = {
+const initialState: initialState = {
   value: [],
-} as initialState;
+};
 
 export const companies = createSlice({
   name: 'companies',
@@ -20,4 +21,6 @@ export const companies = createSlice({
 });
 
 export const { setCompanies } = companies.actions;
+export const selectValue = (state: RootState) => state.companies.value;
+
 export default companies.reducer;
