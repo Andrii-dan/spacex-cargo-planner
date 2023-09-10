@@ -1,4 +1,15 @@
+'use client';
+
+import { useSelector } from 'react-redux';
+import { selectCompaniesValue } from '@/redux/features/companiesSlice';
+
 export default function Navbar() {
+  const companies = useSelector(selectCompaniesValue);
+
+  const handleSaveClick = () => {
+    localStorage.setItem('companies', JSON.stringify(companies));
+  };
+
   return (
     <nav className="flex justify-around items-center p-8 h-14 bg-slate-800">
       <h1>Cargo Planner</h1>
@@ -15,7 +26,10 @@ export default function Navbar() {
         <button className="mx-2 p-1.5 px-4 border-2 rounded-2xl border-rose-500">
           Load
         </button>
-        <button className="mx-2 p-1.5 px-4 border-2 rounded-2xl border-rose-500">
+        <button
+          onClick={handleSaveClick}
+          className="mx-2 p-1.5 px-4 border-2 rounded-2xl border-rose-500"
+        >
           Save
         </button>
       </div>
