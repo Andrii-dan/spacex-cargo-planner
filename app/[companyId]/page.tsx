@@ -23,7 +23,7 @@ export default function Company({ params }: Props) {
   const company = useSelector(selectCompanyById(companyId)) as Company;
   const bays = useSelector(selectBaysValue);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const boxes = e.target.value;
 
     dispatch(
