@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
-import { selectValue } from '@/redux/features/companiesSlice';
+import { selectCompaniesValue } from '@/redux/features/companiesSlice';
 import { Company } from '@/models/company';
 
 export default function CompaniesList() {
-  const companies = useSelector(selectValue);
+  const companies = useSelector(selectCompaniesValue);
 
   return (
     <>
