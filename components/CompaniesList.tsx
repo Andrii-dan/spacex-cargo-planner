@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,12 +9,18 @@ import {
   setCompanies,
 } from '@/redux/features/companiesSlice';
 import { Company } from '@/models/company';
-import { useEffect } from 'react';
+import { selectSearchValue } from '@/redux/features/searchSlice';
 
 export default function CompaniesList() {
   const companies = useSelector(selectCompaniesValue);
+  const searchQuery = useSelector(selectSearchValue);
 
   const dispatch = useDispatch();
+
+  // Filter the companies based on the search query
+  const filteredCompanies = companies.filter((company) =>
+    company.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   useEffect(() => {
     const storedData = localStorage.getItem('companies');
@@ -26,7 +33,7 @@ export default function CompaniesList() {
   return (
     <>
       <ul>
-        {companies.map((company: Company) => {
+        {filteredCompanies.map((company: Company) => {
           return (
             <li key={company.id}>
               <Link href={`/${company.id}`}>{company.name}</Link>
