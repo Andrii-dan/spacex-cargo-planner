@@ -17,10 +17,29 @@ export const companies = createSlice({
     setCompanies: (state, action: PayloadAction<Company[]>) => {
       state.value = action.payload;
     },
+    updateCompany: (
+      state,
+      action: PayloadAction<{ id: string; updatedCompany: Company }>,
+    ) => {
+      const { id, updatedCompany } = action.payload;
+
+      // Find the index of the company to update
+      const index = state.value.findIndex((company) => company.id === id);
+
+      if (index !== -1) {
+        // Replace the old company with the updated company
+        state.value[index] = updatedCompany;
+      }
+    },
   },
 });
 
-export const { setCompanies } = companies.actions;
-export const selectValue = (state: RootState) => state.companies.value;
+// Selector function to get a company by its id
+export const selectCompanyById = (companyId: string) => (state: RootState) => {
+  return state.companies.value.find((company) => company.id === companyId);
+};
+
+export const { setCompanies, updateCompany } = companies.actions;
+export const selectCompaniesValue = (state: RootState) => state.companies.value;
 
 export default companies.reducer;
