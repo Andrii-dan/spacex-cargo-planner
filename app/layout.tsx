@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <Navbar />
-          <div className="flex flex-row">
+          <div className="flex flex-row h-[calc(100vh-4rem)]">
             <Sidebar />
             {children}
           </div>
