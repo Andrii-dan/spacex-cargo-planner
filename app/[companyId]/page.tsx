@@ -36,7 +36,7 @@ export default function Company({ params }: Props) {
   }, [dispatch, company]);
 
   return (
-    <main className="flex flex-col w-full justify-row p-8 border-2 bg-sky-900">
+    <main className="flex flex-col w-full justify-row m-4 text-gray-700 rounded-lg p-8 ">
       <h2 className="text-3xl py-2">{company?.name}</h2>
       <p className="underline">{company?.email}</p>
       <p className="py-8">Number of required bays {bays}</p>

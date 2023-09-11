@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 
 // Components
-import Sidebar from '@/components/Sidebar';
-import Navbar from '@/components/Navbar';
+import Sidebar from '@/components/layout/Sidebar';
+import Navbar from '@/components/layout/navbar/Navbar';
 
 // Styles
 import './globals.css';
@@ -27,9 +27,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <Navbar />
-          <div className="flex flex-row h-[calc(100vh-4rem)]">
+          <div className="flex flex-row h-[calc(100vh-4rem)] text-text-primary">
             <Sidebar />
-            {children}
+            <div className="container flex mx-auto">{children}</div>
           </div>
         </ReduxProvider>
       </body>
