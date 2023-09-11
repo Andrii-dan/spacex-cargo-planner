@@ -4,10 +4,12 @@ import { RootState } from '../store';
 
 type initialState = {
   value: Company[];
+  loading: boolean
 };
 
 const initialState: initialState = {
   value: [],
+  loading: false
 };
 
 export const companies = createSlice({
@@ -31,6 +33,9 @@ export const companies = createSlice({
         state.value[index] = updatedCompany;
       }
     },
+    setLoading: (state, action: PayloadAction<boolean>)=>{
+      state.loading = action.payload
+    }
   },
 });
 
@@ -39,7 +44,8 @@ export const selectCompanyById = (companyId: string) => (state: RootState) => {
   return state.companies.value.find((company) => company.id === companyId);
 };
 
-export const { setCompanies, updateCompany } = companies.actions;
+export const { setCompanies, updateCompany, setLoading } = companies.actions;
 export const selectCompaniesValue = (state: RootState) => state.companies.value;
+export const selectCompaniesLoading = (state: RootState) => state.companies.loading
 
 export default companies.reducer;

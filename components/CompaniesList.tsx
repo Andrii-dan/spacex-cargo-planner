@@ -5,17 +5,23 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  selectCompaniesLoading,
   selectCompaniesValue,
   setCompanies,
 } from '@/redux/features/companiesSlice';
-import { Company } from '@/models/company';
 import { selectSearchValue } from '@/redux/features/searchSlice';
+import LoadingMessage from './LoadingMessage';
+import { Company } from '@/models/company';
 
 export default function CompaniesList() {
   const companies = useSelector(selectCompaniesValue);
   const searchQuery = useSelector(selectSearchValue);
+  const loading = useSelector(selectCompaniesLoading);
 
   const dispatch = useDispatch();
+
+  const noDataMessage =
+    "It seems you don't have any locally saved shipments yet. To load your shipments from the network, simply click the 'Load' button.";
 
   // Filter the companies based on the search query
   const filteredCompanies = companies.filter((company) =>
@@ -30,17 +36,27 @@ export default function CompaniesList() {
     }
   }, [dispatch]);
 
+  if (loading) {
+    return <LoadingMessage />;
+  }
+
   return (
     <>
-      <ul>
-        {filteredCompanies.map((company: Company) => {
-          return (
-            <li key={company.id}>
-              <Link href={`/${company.id}`}>{company.name}</Link>
-            </li>
-          );
-        })}
-      </ul>
+      {companies.length ? (
+        <ul>
+          {filteredCompanies.map((company: Company) => {
+            return (
+              <li key={company.id}>
+                <Link href={`/${company.id}`}>{company.name}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className="flex h-full w-full items-center text-center text-gray-700">
+          {noDataMessage}
+        </p>
+      )}
     </>
   );
 }
