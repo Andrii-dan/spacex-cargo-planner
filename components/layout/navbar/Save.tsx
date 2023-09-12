@@ -8,7 +8,7 @@ import { selectShipmentsValue } from '@/redux/features/shipmentsSlice';
 import ActionButton from '@/components/shared/ActionButton';
 import Snackbar from '@/components/shared/Snackbar';
 
-export default function SaveButton() {
+export default function Save() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('Saved successfully!');
 

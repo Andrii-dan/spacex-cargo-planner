@@ -1,14 +1,24 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { setShipments, setLoading } from '@/redux/features/shipmentsSlice';
-import ActionButton from '@/components/shared/ActionButton';
 
-export default function LoadButton() {
+import { setShipments, setLoading } from '@/redux/features/shipmentsSlice';
+
+// Components
+import ActionButton from '@/components/shared/ActionButton';
+import Snackbar from '@/components/shared/Snackbar';
+
+export default function Load() {
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const handleCloseSnackbar = () => {
+    setShowSnackbar(false);
+  };
 
   const getShipmentsData = useCallback(async () => {
     try {
@@ -22,9 +32,20 @@ export default function LoadButton() {
       router.push('/');
     } catch (err) {
       console.error(err);
+      setShowSnackbar(true);
     }
     dispatch(setLoading(false));
   }, [dispatch, router]);
 
-  return <ActionButton func={getShipmentsData} text='Load' />;
+  return (
+    <>
+      <ActionButton func={getShipmentsData} text='Load' />
+      <Snackbar
+        isOpen={showSnackbar}
+        message={'An error occurred while loading data.'}
+        onClose={handleCloseSnackbar}
+        duration={4000}
+      />
+    </>
+  );
 }

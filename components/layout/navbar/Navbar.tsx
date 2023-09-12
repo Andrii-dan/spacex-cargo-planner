@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 // Components
 import SearchForm from './SearchForm';
-import LoadButton from './LoadButton';
-import SaveButton from './SaveButton';
+import Load from './Load';
+import Svae from './Save';
 
 export default function Navbar() {
   return (
@@ -17,8 +17,8 @@ export default function Navbar() {
         <SearchForm />
       </div>
       <div className='flex justify-end w-2/4 sm:w-1/4'>
-        <LoadButton />
-        <SaveButton />
+        <Load />
+        <Svae />
       </div>
     </nav>
   );

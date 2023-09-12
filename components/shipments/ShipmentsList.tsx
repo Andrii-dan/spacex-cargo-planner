@@ -7,10 +7,10 @@ type Props = {
 
 export default function ShipmentsList({ shipmentsToRender }: Props) {
   return (
-    <ul className='p-4'>
+    <ul className='p-2'>
       {shipmentsToRender.map((shipment: Shipment) => {
         return (
-          <li className='py-1 underline' key={shipment.id}>
+          <li className='py-0.5 underline' key={shipment.id}>
             <Link href={`/${shipment.id}`}>{shipment.name}</Link>
           </li>
         );
