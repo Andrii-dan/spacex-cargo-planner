@@ -33,7 +33,7 @@ export default function Load() {
 
       const result = await response.json();
 
-      dispatch(setShipments(result));
+      dispatch(setShipments(result.shipments || result));
 
       router.push('/');
     } catch (err) {
