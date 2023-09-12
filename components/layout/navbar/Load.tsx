@@ -23,7 +23,13 @@ export default function Load() {
   const getShipmentsData = useCallback(async () => {
     try {
       dispatch(setLoading(true));
-      const response = await fetch('http://localhost:4000/shipments');
+
+      const apiUrl =
+        process.env.NODE_ENV === 'production'
+          ? '/data/shipments.json' // Production API URL
+          : 'http://localhost:4000/shipments'; // Local API URL
+
+      const response = await fetch(apiUrl);
 
       const result = await response.json();
 
