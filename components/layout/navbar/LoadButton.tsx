@@ -3,21 +3,21 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { setCompanies, setLoading } from '@/redux/features/companiesSlice';
-import ActionButton from '../../ActionButton';
+import { setShipments, setLoading } from '@/redux/features/shipmentsSlice';
+import ActionButton from '@/components/shared/ActionButton';
 
 export default function LoadButton() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const getCompaniesData = useCallback(async () => {
+  const getShipmentsData = useCallback(async () => {
     try {
       dispatch(setLoading(true));
       const response = await fetch('http://localhost:4000/shipments');
 
       const result = await response.json();
 
-      dispatch(setCompanies(result));
+      dispatch(setShipments(result));
 
       router.push('/');
     } catch (err) {
@@ -26,5 +26,5 @@ export default function LoadButton() {
     dispatch(setLoading(false));
   }, [dispatch, router]);
 
-  return <ActionButton func={getCompaniesData} text="Load" />;
+  return <ActionButton func={getShipmentsData} text='Load' />;
 }

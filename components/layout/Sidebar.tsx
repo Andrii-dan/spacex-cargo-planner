@@ -1,9 +1,9 @@
-import CompaniesList from '../CompaniesList';
+import Shipments from '../shipments/Shipments';
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-column w-96 m-6 shadow-lg shadow-slate-600 bg-background-primary border rounded-lg p-8 overflow-auto">
-      <CompaniesList />
-    </div>
+    <nav className='w-full sm:w-96 h-60 sm:h-full px-6 pt-2 overflow-auto border-b sm:border-r bg-slate-50'>
+      <Shipments />
+    </nav>
   );
 }

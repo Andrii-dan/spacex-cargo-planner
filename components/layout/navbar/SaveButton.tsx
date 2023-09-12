@@ -2,25 +2,25 @@
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCompaniesValue } from '@/redux/features/companiesSlice';
+import { selectShipmentsValue } from '@/redux/features/shipmentsSlice';
 
 // Components
-import ActionButton from '../../ActionButton';
-import Snackbar from '@/components/Snackbar';
+import ActionButton from '@/components/shared/ActionButton';
+import Snackbar from '@/components/shared/Snackbar';
 
 export default function SaveButton() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('Saved successfully!');
 
-  const companies = useSelector(selectCompaniesValue);
+  const shipments = useSelector(selectShipmentsValue);
 
   const handleCloseSnackbar = () => {
     setShowSnackbar(false);
   };
 
-  const handleSaveCompanies = () => {
+  const handleSaveShipments = () => {
     try {
-      localStorage.setItem('companies', JSON.stringify(companies));
+      localStorage.setItem('shipments', JSON.stringify(shipments));
       setShowSnackbar(true);
     } catch (error) {
       console.error('Error saving data to local storage:', error);
@@ -31,7 +31,7 @@ export default function SaveButton() {
 
   return (
     <>
-      <ActionButton func={handleSaveCompanies} text="Save" />
+      <ActionButton func={handleSaveShipments} text='Save' />
       <Snackbar
         isOpen={showSnackbar}
         message={snackbarMessage}

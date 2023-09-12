@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // Slices
-import companiesSlice from './features/companiesSlice';
+import shipmentsSlice from './features/shipmentsSlice';
 import searchSlice from './features/searchSlice';
 import baysSlice from './features/baysSlice';
 
 export const store = configureStore({
   reducer: {
-    companies: companiesSlice,
+    shipments: shipmentsSlice,
     search: searchSlice,
-    bays: baysSlice
+    bays: baysSlice,
   },
 });
 
